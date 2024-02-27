@@ -84,6 +84,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Services\BaseService.cs" />
+    <Compile Include="Services\BookService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Utils\WindowManager.cs" />
     <Page Include="MainWindow.xaml">
