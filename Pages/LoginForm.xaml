@@ -24,6 +24,24 @@
                     Вход
                 </Label>
 
+                <StackPanel HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
+                        <Label>
+                            Логин
+                        </Label>
+
+                        <TextBox MinWidth="250" x:Name="LoginInput" />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0 20 0 0">
+                        <Label>
+                            Пароль
+                        </Label>
+
+                        <TextBox MinWidth="250" x:Name="PasswordInput" />
+                    </StackPanel>
+                </StackPanel>
+
                 <Grid Margin="0 20 0 0">
                     <TextBox Height="53" HorizontalAlignment="Left" FontSize="28" Foreground="Red" FontStyle="Italic" FontWeight="Heavy" Margin="261,174,0,0" Name="textBox1" VerticalAlignment="Top" Width="212" Background="{x:Null}" FontStretch="UltraCondensed"></TextBox>
 
