@@ -25,7 +25,20 @@
                 </Label>
 
                 <Grid Margin="0 20 0 0">
-                    
+                    <TextBox Height="53" HorizontalAlignment="Left" FontSize="28" Foreground="Red" FontStyle="Italic" FontWeight="Heavy" Margin="261,174,0,0" Name="textBox1" VerticalAlignment="Top" Width="212" Background="{x:Null}" FontStretch="UltraCondensed"></TextBox>
+
+                    <Button Content="Получить капчу" Height="31" HorizontalAlignment="Left" Margin="287,232,0,0" Name="button1" VerticalAlignment="Top" Width="161" Click="button1_Click" />
+                    <Label x:Name="Texos" Content="Тут капча" HorizontalAlignment="Left" Margin="280,69,0,0" VerticalAlignment="Top" Height="48" Width="206" FontSize="24" FontFamily="Yu Gothic Medium" RenderTransformOrigin="0.5,0.5">
+                        <Label.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="0.8" ScaleY="1.25"/>
+                                <SkewTransform AngleX="-29" AngleY="6"/>
+                                <RotateTransform Angle="27.697"/>
+                                <TranslateTransform Y="1" X="-5"/>
+                            </TransformGroup>
+                        </Label.RenderTransform>
+                    </Label>
+                    <Button Content="Войти" HorizontalAlignment="Left" Margin="287,268,0,0" VerticalAlignment="Top" Width="161" Height="40" Click="Button_Click"/>
                 </Grid>
             </StackPanel>
         </ScrollViewer>
@@ -36,13 +49,6 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-
-            <Button 
-                Style="{StaticResource AuthButton}"
-                Grid.Column="1"
-            >
-                Войти
-            </Button>
         </Grid>
     </Grid>
 </Window>
