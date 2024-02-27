@@ -1,4 +1,5 @@
 ﻿using BookApp.Services;
+using BookApp.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,11 @@ namespace BookApp.Pages
             bool result = Var.f == textBox1.Text;
 
             return result;
+        }
+
+        private void RedirectToMain()
+        {
+            WindowManager.ChangeWindow(this, new MainWindow());
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
@@ -107,6 +113,8 @@ namespace BookApp.Pages
                 var user = this._userService.GetUser(login, password);
 
                 MessageBox.Show($"Добро пожаловать, {user.UserLogin}");
+
+                this.RedirectToMain();
             }
             catch (Exception ex) // Если не получается найти пользователя, значит данные неверные
             {
