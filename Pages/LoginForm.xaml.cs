@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BookApp.Services;
+using BookApp.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +21,10 @@ namespace BookApp.Pages
     /// </summary>
     public partial class LoginForm : Window
     {
+        private UserService _userService = new UserService();
+
+        private bool _hasCaptchaPassed = false;
+
         public LoginForm()
         {
             InitializeComponent();
@@ -26,11 +32,20 @@ namespace BookApp.Pages
 
         private bool ValidateCaptcha()
         {
-            return Var.f == textBox1.Text;
+            bool result = Var.f == textBox1.Text;
+
+            return result;
+        }
+
+        private void RedirectToMain()
+        {
+            WindowManager.ChangeWindow(this, new MainWindow());
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
+            this._hasCaptchaPassed = false;
+
             String allowchar = " ";
 
             allowchar = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z";
@@ -71,13 +86,40 @@ namespace BookApp.Pages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (this.ValidateCaptcha())
-            {
-                MessageBox.Show("Молодец, капча верная");
-            }
-            else
+            if (!this.ValidateCaptcha())
             {
                 MessageBox.Show("неправильно, переделывай");
+                return;
+            }
+
+            if (!this._hasCaptchaPassed)
+            {
+                MessageBox.Show("Молодец, капча верная");
+                this._hasCaptchaPassed = true;
+            }
+
+            // Пробуем найти пользователя по логину и паролю
+            try
+            {
+                string login = LoginInput.Text;
+                string password = PasswordInput.Text;
+
+                if (login.Length == 0 || password.Length == 0)
+                {
+                    MessageBox.Show("Все поля должны быть заполненными.");
+                    return;
+                }
+
+                var user = this._userService.GetUser(login, password);
+
+                MessageBox.Show($"Добро пожаловать, {user.UserLogin}");
+
+                this.RedirectToMain();
+            }
+            catch (Exception ex) // Если не получается найти пользователя, значит данные неверные
+            {
+                MessageBox.Show("Неверные данные!");
+                return;
             }
         }
     }
