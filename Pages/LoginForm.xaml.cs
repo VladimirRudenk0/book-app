@@ -92,7 +92,7 @@ namespace BookApp.Pages
                 this._hasCaptchaPassed = true;
             }
 
-            // Пробуем найти пользователя по логину
+            // Пробуем найти пользователя по логину и паролю
             try
             {
                 string login = LoginInput.Text;
