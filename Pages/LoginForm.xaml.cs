@@ -71,14 +71,13 @@ namespace BookApp.Pages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (this.ValidateCaptcha())
-            {
-                MessageBox.Show("Молодец, капча верная");
-            }
-            else
+            if (!this.ValidateCaptcha())
             {
                 MessageBox.Show("неправильно, переделывай");
+                return;
             }
+
+            MessageBox.Show("Молодец, капча верная");
         }
     }
 }
