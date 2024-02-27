@@ -4,6 +4,8 @@
              xmlns:local="clr-namespace:BookApp"
              Startup="Application_Startup">
     <Application.Resources>
-         
+        <Style x:Key="AuthButton" TargetType="Button">
+            <Setter Property="Padding" Value="5 10" />
+        </Style>
     </Application.Resources>
 </Application>
