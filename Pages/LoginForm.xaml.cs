@@ -22,6 +22,8 @@ namespace BookApp.Pages
     {
         private UserService _userService = new UserService();
 
+        private bool _hasCaptchaPassed = false;
+
         public LoginForm()
         {
             InitializeComponent();
@@ -29,11 +31,15 @@ namespace BookApp.Pages
 
         private bool ValidateCaptcha()
         {
-            return Var.f == textBox1.Text;
+            bool result = Var.f == textBox1.Text;
+
+            return result;
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
+            this._hasCaptchaPassed = false;
+
             String allowchar = " ";
 
             allowchar = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z";
@@ -80,13 +86,23 @@ namespace BookApp.Pages
                 return;
             }
 
-            MessageBox.Show("Молодец, капча верная");
+            if (!this._hasCaptchaPassed)
+            {
+                MessageBox.Show("Молодец, капча верная");
+                this._hasCaptchaPassed = true;
+            }
 
             // Пробуем найти пользователя по логину
             try
             {
-                string login = "XenoPOMP";
-                string password = "none";
+                string login = LoginInput.Text;
+                string password = PasswordInput.Text;
+
+                if (login.Length == 0 || password.Length == 0)
+                {
+                    MessageBox.Show("Все поля должны быть заполненными.");
+                    return;
+                }
 
                 var user = this._userService.GetUser(login, password);
 
