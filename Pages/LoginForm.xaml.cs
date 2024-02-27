@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookApp.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,8 @@ namespace BookApp.Pages
     /// </summary>
     public partial class LoginForm : Window
     {
+        private UserService _userService = new UserService();
+
         public LoginForm()
         {
             InitializeComponent();
@@ -78,6 +81,22 @@ namespace BookApp.Pages
             }
 
             MessageBox.Show("Молодец, капча верная");
+
+            // Пробуем найти пользователя по логину
+            try
+            {
+                string login = "XenoPOMP";
+                string password = "none";
+
+                var user = this._userService.GetUser(login, password);
+
+                MessageBox.Show($"Добро пожаловать, {user.UserLogin}");
+            }
+            catch (Exception ex) // Если не получается найти пользователя, значит данные неверные
+            {
+                MessageBox.Show("Неверные данные!");
+                return;
+            }
         }
     }
 }

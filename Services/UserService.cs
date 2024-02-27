@@ -5,9 +5,17 @@ namespace BookApp.Services
 {
     public class UserService : BaseService
     {
-        public C27_02_User_ GetUserByLogin(string login)
+        /// <summary>
+        /// Получить одного пользователя по логину.
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
+        public C27_02_User_ GetUser(string login, string password)
         {
-            return this.db.C27_02_User_.Where(u => u.UserLogin == login).First();
+            return 
+                this.db.C27_02_User_
+                    .Where(u => u.UserLogin == login && u.UserPassword == password)
+                    .First();
         }
     }
 }
