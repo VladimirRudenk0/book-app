@@ -24,6 +24,11 @@ namespace BookApp.Pages
             InitializeComponent();
         }
 
+        private bool ValidateCaptcha()
+        {
+            return Var.f == textBox1.Text;
+        }
+
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             String allowchar = " ";
@@ -66,7 +71,7 @@ namespace BookApp.Pages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (Var.f == textBox1.Text)
+            if (this.ValidateCaptcha())
             {
                 MessageBox.Show("Молодец, капча верная");
             }
